@@ -1,10 +1,15 @@
-import { getAll } from '../services/getData'
+import { useState } from 'react';
+import { fetchAll } from '../services/getData'
+import Task from "./Task";
 
 const Tasks = () => {
+    const [tasks, setTasks] = useState(fetchAll()); 
     
     return (
         <div>
-            Hello from Tasks            
+            {
+                tasks.map( task => <Task key = { task.id } title = { task.title } description = { task.description } />)
+            }
         </div>
     )
 }

@@ -1,13 +1,20 @@
 import firebase from "./firebase";
-const tasks = firebase
-                    .firestore()
-                    .collection('tasks')
-                    .onSnapshot((snapShot)=> {
-                        snapShot.docs.forEach((doc)=> {
-                            console.log(doc.data());
-                        })
-                    })
-
-export const getAll = () => {
+  
+export const fetchAll = () => {
+    let tasks = []         
+    firebase.firestore()
+            .collection('tasks')
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach((doc) => {
+                    tasks.push({
+                        ...doc.data()
+                    });
+                });
+            })
+            .catch(error => {
+                console.log("Error getting documents: ", error);
+            });
+    
     return tasks
 }
