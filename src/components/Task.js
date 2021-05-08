@@ -7,6 +7,7 @@ const Task = ({ title , description}) => {
                 { title }<br/>
             <label> Description:</label><br/>
                 { description }
+            <br/>
         </div>
     )
 }
