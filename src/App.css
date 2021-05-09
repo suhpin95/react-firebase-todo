@@ -8,10 +8,18 @@
 .header{
   height: 20vh;
 }
+.form{
+  border-color: black;
+}
 .card{
   display: grid;
   box-shadow: 9px 6px 2px #bbdde4;
   border-radius: 10px;
+  margin: auto;
+  max-width: 300px;
+}
+.form{
+  display: grid;
   margin: auto;
   max-width: 300px;
 }
