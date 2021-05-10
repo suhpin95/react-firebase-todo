@@ -1,26 +1,46 @@
 import React, { useState } from 'react'
 import { Form, FormGroup, Input, Label, Button } from 'reactstrap'
+import { v4 as uuid_v4 } from "uuid";
+import db from "../services/firebase";
 
 
 const AddTask = () => {
     // use hooks to maintain state
-    const [state, setState] = useState();
+    const initialState = {
+        id: '',
+        title: '',
+        description: ''
+    }
+    const [state, setState] = useState(initialState);
     
     const handleState = (event) => {
         setState({
             ...state,
+            id: uuid_v4(),
             [event.target.name]: event.target.value
         })
     }
     const handleSubmit = (event)=> {
         event.preventDefault();
+        console.log(state)
         setState({
            ...state,
+           id: '',
            title:'',
            description: ''
         })
+        setData( state ) // insert into firebase 
     }
-    
+
+    const setData = async ( state ) => {
+        const response = db.collection('tasks')
+        try{    
+            await response.add(state);
+        } catch( err ){
+            console.log(err)
+        }        
+          
+    }
     return (
         <div className = 'form'>
             <Form onSubmit = { handleSubmit }>
