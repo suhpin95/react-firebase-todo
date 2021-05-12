@@ -22,7 +22,6 @@ const AddTask = () => {
     }
     const handleSubmit = (event)=> {
         event.preventDefault();
-        console.log(state)
         setState({
            ...state,
            id: '',
